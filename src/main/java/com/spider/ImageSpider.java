@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class ImageSpider {
 
     // private static final String domain = "https://www.doutula.com";
-    private static final String domain = "https://www.52doutu.cn/search/牛逼";
+    private static final String domain = "https://www.52doutu.cn/search/666";
     private static final String REGEX_52DOUTU = "href=\"((https?:\\/\\/)\\S+(\\.(jpe?g|png|gif))|(http:\\/\\/\\S+\\.pic\\.sogou\\.com\\/\\S{16}))";
 
     public static void main(String[] args) throws IOException {
