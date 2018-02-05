@@ -39,29 +39,29 @@ public class ImageSpider {
         InputStream inputStream = response.getEntity().getContent();
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder builder = new StringBuilder();
-        bufferedReader.lines().forEach(builder::append);
-        String pageContent = builder.toString();
+        StringBuilder lineBuilder = new StringBuilder();
+        bufferedReader.lines().forEach(lineBuilder::append);
+        String pageContent = lineBuilder.toString();
 
         List<String> imgUrls = getImgUrlsInContent(pageContent, REGEX_52DOUTU);
         System.out.println(imgUrls);
 
-        imgUrls.forEach((e) -> {
+        imgUrls.forEach((url) -> {
             InputStream imageStream;
-            final String fileName = getImgFileName(e);
+            final String fileName = getImgFileName(url);
             System.out.println("save image: " + fileName);
             final String suffix = getSuffix(fileName);
             try {
                 File tofile = new File("imgs/" + fileName);
                 boolean fileExist = tofile.exists() || tofile.createNewFile();
-                imageStream = new URL(e).openConnection().getInputStream();
+                imageStream = new URL(url).openConnection().getInputStream();
 
                 BufferedImage bufferedImage = ImageIO.read(imageStream);
                 if (fileExist) {
                     ImageIO.write(bufferedImage, suffix, tofile);
                 }
             } catch (Exception e1) {
-                System.out.println("Error Image Url: " + e);
+                System.out.println("Error Image Url: " + url);
                 e1.printStackTrace();
             }
         });
